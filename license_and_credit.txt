@@ -1,0 +1,3 @@
+LICENSE: CC-BY-SA 4.0 found at https://creativecommons.org/licenses/by-sa/4.0
+CREDIT: Dataset was created based on images by Julien de la Bruère-Terreault from https://www.kaggle.com/drgfreeman/rockpaperscissors
+CREDIT: Connor Rogers for help with frontend and prior version of design

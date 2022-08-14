@@ -14,8 +14,14 @@ class accuracy_cutoff(callbacks.Callback):
 
 
 # helps generate data by transforming existing images (rescale shift rotation etc) and determines how much will be set aside for validation
-generated_data = ImageDataGenerator(rotation_range=80, vertical_flip=True, horizontal_flip=True,
-                                    shear_range=0.2, fill_mode='wrap', validation_split=0.2)
+generated_data = ImageDataGenerator(
+    rotation_range=90,
+    vertical_flip=True,
+    horizontal_flip=True,
+    shear_range=0.2,
+    fill_mode='wrap',
+    validation_split=0.2
+)
 train_data = generated_data.flow_from_directory(base_dir, target_size=image_size, class_mode='categorical',
                                                 subset='training', shuffle=True, color_mode="grayscale")
 val_data = generated_data.flow_from_directory(base_dir, target_size=image_size, class_mode='categorical',

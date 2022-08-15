@@ -1,5 +1,6 @@
 from keras.preprocessing.image import ImageDataGenerator
 from keras import layers, models, callbacks, optimizers
+from matplotlib import pyplot as plt
 
 base_dir = 'dataset'
 image_size = (200, 300)
@@ -19,8 +20,9 @@ generated_data = ImageDataGenerator(
     vertical_flip=True,
     horizontal_flip=True,
     shear_range=0.2,
+    zoom_range=[1.0,1.8],
     fill_mode='wrap',
-    validation_split=0.2
+    validation_split=0.2,
 )
 train_data = generated_data.flow_from_directory(base_dir, target_size=image_size, class_mode='categorical',
                                                 subset='training', shuffle=True, color_mode="grayscale")
@@ -54,7 +56,7 @@ model.compile(
     metrics=['accuracy']
 )
 
-fitted_model = model.fit(
+history = model.fit(
     train_data,
     validation_data=val_data,
     steps_per_epoch=40,
@@ -63,4 +65,12 @@ fitted_model = model.fit(
     callbacks=[accuracy_cutoff()]
 )
 
-model.save('model.h5', include_optimizer=False)
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.savefig("accuracy_plot.png")
+
+model.save(r'C:\Users\shepherdm\Documents\school\deep learning\final project\CNN_RPS\model.h5', include_optimizer=False)

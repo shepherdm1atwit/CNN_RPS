@@ -1,7 +1,7 @@
 <!-- ABOUT THE PROJECT -->
-## About The Project
+# About The Project
 
-RPS_flask is a game of rock paper scissors vs a computer. The computer chooses random hand signs to play, but uses a Keras image classification model running on a flask server to recieve client pictures and determine which hand sign the user is showing the camera. Try it out at [rps.CodeSmith.link](https://rps.codesmith.link)!
+CNN_RPS is an implementation of the game "rock paper scissors" that a human can play vs a computer through the use of a convolutional neural network. The computer chooses random hand signs to play, but uses a Keras image classification model running on a flask backend to recieve images from a web client and determine which hand sign the user is showing the camera. Try it out at [rps.CodeSmith.link](https://rps.codesmith.link)!
 
 ### Built With
 
@@ -13,7 +13,13 @@ RPS_flask is a game of rock paper scissors vs a computer. The computer chooses r
 * [NGINX](https://www.nginx.com/)
 * [gUnicorn](https://gunicorn.org/)
 
+## Dataset / Feature Extraction
+The dataset I chose to use for this project is a modified version of the "Rock-Paper-Scissors Images" dataset by [Julien de la Bruère-Terreault](https://github.com/imfdlh), found [here](https://www.kaggle.com/datasets/drgfreeman/rockpaperscissors). Google's [MediaPipe](https://google.github.io/mediapipe/) was used to perform feature extraction to simplify each image into it's basic shape by converting the images from full color and detail images of hands into greyscale skeletons with dots to represent each joint and lines to represent segments of the hand. This allows for my model to focus entirely on recognizing the shape of each hand sign in order to classify them into "rock", "paper", or "scissors", rather than also having to differentiate the hand from the surrounding environment before attempting to recognize and classify it's shape. An example of an original and feature extracted image can be seen below.
 
+
+
+<!-- Deployment -->
+# Deployment
 
 ## Basic/Local Setup - Python
 **This setup is** *much* **simpler than the advanced setup, but is made to be temporary, not a "production" deployment**

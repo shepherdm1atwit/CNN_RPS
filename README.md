@@ -1,13 +1,15 @@
-<!-- ABOUT THE PROJECT -->
+<!-- PROJECT -->
 # About The Project
+## Project Introduction
 
-CNN_RPS is an implementation of the game "rock paper scissors" that a human can play vs a computer through the use of a convolutional neural network. The computer chooses random hand signs to play, but uses a Keras image classification model running on a flask backend to recieve images from a web client and determine which hand sign the user is showing the camera. Try it out at [rps.CodeSmith.link](https://rps.codesmith.link)!
+CNN_RPS is an implementation of the game "rock paper scissors" that a human can play vs a computer through the use of a convolutional neural network. The computer chooses random hand signs to play, but uses a Keras image classification model running on a flask backend to recieve images from a web client and determine which hand sign the user is showing the camera. This model has been fully deployed on a private server using Nginx and Gunicorn under a private domain, and can be tested simply using a webcam or phone camera by visiting [rps.CodeSmith.link](https://rps.codesmith.link).
 
-### Built With
+### Tools Used:
 
 * [Keras](https://keras.io/)
 * [TensorFlow](https://www.tensorflow.org/)
 * [MediaPipe](https://google.github.io/mediapipe/)
+* [Matplotlib](https://matplotlib.org/)
 * [Flask](https://flask.palletsprojects.com/)
 * [JQuery](https://jquery.com)
 * [NGINX](https://www.nginx.com/)
@@ -18,7 +20,14 @@ The dataset I chose to use for this project is a modified version of the "Rock-P
 ![pre-feature-extraction](https://github.com/shepherdm1atwit/CNN_RPS/blob/1ba3257410f35213e830676064164381bb21e29b/train_test/hands_dataset/paper/04l5I8TqdzF9WDMJ.png)![post-feature-extraction](https://github.com/shepherdm1atwit/CNN_RPS/blob/1ba3257410f35213e830676064164381bb21e29b/train_test/dataset/paper/04l5I8TqdzF9WDMJ.png)
 
 ## Model Training
-Once the feature extraction on the dataset was completed using [convert_greyscale.py](https://github.com/shepherdm1atwit/CNN_RPS/blob/70c34c908758c1f5118538f87292df6ffdabb5f7/train_test/convert_grayscale.py), the images were loaded and the augmented using a Keras **ImageDataGenerator**. This not only means that the images do not all need to be loaded all at once, saving on system memory usage, but also allows for the augmentation of the training data via rotation, vertically and horizontally flipping the images, and randomly sheering and zooming the images within specified ranges. Using an **ImageDataGenerator** also allows for the dataset to be more easily split into training and validation data, which can be used both during and after training to evaluate the accuracy of the model on held-out data. The neural netowrk itself consists of multiple 2d convolution and max pooling layers, each with it's own 20% dropout to prevent overfitting, finally ending with a set of dense layers for the output. This, and other training information including the loss function and optimizer used, can be found in [train_model.py](https://github.com/shepherdm1atwit/CNN_RPS/blob/70c34c908758c1f5118538f87292df6ffdabb5f7/train_test/train_model.py). 50 epochs were used to ensure the highest possible accuracy without overfitting. 
+Once the feature extraction on the dataset was completed using [convert_greyscale.py](https://github.com/shepherdm1atwit/CNN_RPS/blob/70c34c908758c1f5118538f87292df6ffdabb5f7/train_test/convert_grayscale.py), the images were loaded and the augmented using a Keras **ImageDataGenerator**. This not only means that the images do not all need to be loaded all at once, saving on system memory usage, but also allows for the augmentation of the training data via rotation, vertically and horizontally flipping the images, and randomly sheering and zooming the images within specified ranges to prevent overfitting and improve real-world performance. Using an **ImageDataGenerator** also allows for the dataset to be more easily split into training and validation data, which can be used both during and after training to evaluate the accuracy of the model on held-out data. The neural netowrk itself consists of multiple 2d convolution and max pooling layers, each with it's own 20% dropout to prevent overfitting, finally ending with a set of dense layers for the output. This, and other training information including the loss function and optimizer used, can be found in [train_model.py](https://github.com/shepherdm1atwit/CNN_RPS/blob/70c34c908758c1f5118538f87292df6ffdabb5f7/train_test/train_model.py). 50 epochs were used to ensure the highest possible accuracy without overfitting. Below, a graph of training and validation accuracy during each epoch can be seen, showing both the trainging and validation accuracy plateau as the model nears 50 epochs of training.<br>![accuracy_plot.png](https://github.com/shepherdm1atwit/CNN_RPS/blob/70c34c908758c1f5118538f87292df6ffdabb5f7/train_test/accuracy_plot.png)
+
+## Analysis
+As shown above, the model ended up with an accuracy of 97% on training data and 98% on held out validation data, lending to it's remarkable levels of accuracy when tested on validation data as well as real-world data in a deployed setting. A confusion matrix showing the high accuracy of the model and it's few misclassifications when tested on validation data can be found below:<br>![confusion_matrix.png](https://github.com/shepherdm1atwit/CNN_RPS/blob/a6ddee0859dad806e0000d91439a474fa4d4e832/train_test/confusion_matrix.png)
+
+
+## Final Presentation
+For presentation slides, please see the [presentation PDF](ADL%20Final.pdf).
 
 <!-- Deployment -->
 # Deployment
@@ -149,8 +158,6 @@ Once the feature extraction on the dataset was completed using [convert_greyscal
    sudo certbot --nginx -d yourdomain -d www.yourdomain
    ```
 
-
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -158,18 +165,8 @@ Once your flask server is running, either in development mode through `python ap
 visit the webpage by going to www.yourdomain or localhost and enjoy.
 
 
-## Final Report
-For full report, please see the [presentation PDF](DataSci%20Final.pdf).
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the CC-BY-SA 4.0 License. See `licence_and_credit.txt` for more information.
-
-
-
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
 * Dataset is modified work by [Julien de la Bruère-Terreault](https://github.com/imfdlh)
+* Project based on previous work done alongside [Connor Rogers](https://github.com/Connor-Rogers)

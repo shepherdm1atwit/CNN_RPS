@@ -26,17 +26,7 @@ All information related to the model's training can be found in [train_model.py]
 As shown above, the model ended up with an accuracy of 97% on training data and 98% on held out validation data, lending to it's remarkable levels of accuracy when tested on validation data as well as real-world data in a deployed setting. A confusion matrix showing the high accuracy of the model and it's few misclassifications when tested on validation data can be found below:<br>![confusion_matrix.png](https://github.com/shepherdm1atwit/CNN_RPS/blob/a6ddee0859dad806e0000d91439a474fa4d4e832/train_test/confusion_matrix.png)
 
 ## Final Presentation
-For presentation slides, please see the [presentation PDF](BROKENLINK).
-
-```diff
-- ^^^^^^^^^
-
-
-- FIX LINK HERE
-
-
-
-```
+For presentation slides, please see the [final presentation](https://github.com/shepherdm1atwit/CNN_RPS/blob/c1d19be22d46a33e167608c35d3d88e48723c69a/ADL%20Final.pptx).
 
 <!-- Deployment -->
 # Deployment
